@@ -23,7 +23,7 @@
 // -- for Rochester Muon momentum correction -- //
 #include "../../TOOL/RoccoR/RoccoR.cc"
 // -- Customized Analyzer for Drel-Yan Analysis -- //
-#include "../../HEADER/DYAnalyzer_TightID_PFIso_v20180521.h"
+#include "../../HEADER/DYAnalyzer_TightID_PFIso_v20190212.h"
 
 static inline void loadBar(int x, int n, int r, int w);
 
@@ -32,8 +32,7 @@ static inline void loadBar(int x, int n, int r, int w);
 void FR_applyFR(Int_t debug, Int_t type, Int_t remainder = 9999, Int_t isTopPtReweighting = 0, TString HLTname = "IsoMu24_OR_IsoTkMu24")
 {
 	gROOT->SetBatch(kTRUE);
-	TString NtupleLocation = gSystem->Getenv("DM_DATA_PATH");
-	TString BaseDir= gSystem->Getenv("DM_BASE_PATH");
+        TString NtupleLocation = "root://cluster142.knu.ac.kr:1094//store/user/dpai/_prime_/DYntuple/v2.6/";
 
 	// -- Run2016 luminosity [/pb] -- //
 	Double_t lumi = Lumi; //BtoH
@@ -94,8 +93,8 @@ void FR_applyFR(Int_t debug, Int_t type, Int_t remainder = 9999, Int_t isTopPtRe
 	}
 
 	// -- Output ROOTFile -- //	
-	//TString Output_ROOTFile = BaseDir+"/RESULT/FR/fake_test_20181010_"+TString::Itoa(type,10)+"_"+TString::Itoa(remainder,10)+"_"
-	TString Output_ROOTFile = BaseDir+"/RESULT/FR/fake_TightID_PFIso_EffSF_20181014_"+TString::Itoa(type,10)+"_"+TString::Itoa(remainder,10)+"_"
+        //TString Output_ROOTFile = "../RESULT/FR/fake_test_20181010_"+TString::Itoa(type,10)+"_"+TString::Itoa(remainder,10)+"_"
+        TString Output_ROOTFile = "../RESULT/FR/fake_TightID_PFIso_EffSF_20181014_"+TString::Itoa(type,10)+"_"+TString::Itoa(remainder,10)+"_"
 								+TString::Itoa(isTopPtReweighting,10)+".root";
 	if( debug ) Output_ROOTFile = "test.root";
 	TFile *f = new TFile(Output_ROOTFile, "recreate");
@@ -122,15 +121,12 @@ void FR_applyFR(Int_t debug, Int_t type, Int_t remainder = 9999, Int_t isTopPtRe
 		//Set MC chain
 		if( isMC == kTRUE )
 		{
-			TString version = "v2.1";
-			if( Type.Contains("QCD") ) version = "v2.3";
-
 			if( remainder == 9999 )
-				chain->Add(NtupleLocation+"/"+version+"/"+ntupleDirectory[i_tup]+"/*.root");
+                                chain->Add(NtupleLocation+ntupleDirectory[i_tup]+"/*.root");
 			else
 				for(Double_t ii=1; ii<=1500; ii++)
 					if(ii - TMath::Floor(ii/Div) * Div == remainder)
-						chain->Add(NtupleLocation+"/"+version+"/"+ntupleDirectory[i_tup]+"/*_"+TString::Itoa(ii,10)+".root");
+                                                chain->Add(NtupleLocation+ntupleDirectory[i_tup]+"/*_"+TString::Itoa(ii,10)+".root");
 		}
 		//Set Data chain
 		else
@@ -138,14 +134,14 @@ void FR_applyFR(Int_t debug, Int_t type, Int_t remainder = 9999, Int_t isTopPtRe
 			if( remainder == 9999 )
 			{
 				chain->Add(NtupleLocation+"/v2.0/"+DataLocation+"/*.root");
-				if(type==7) chain->Add(NtupleLocation+"/v2.0/SingleMuon_Run2016Hver3/*.root");
+                                if(type==7) chain->Add(NtupleLocation+"SingleMuon_Run2016Hver3/*.root");
 			}
 			else
 			{
 				for(Double_t ii=1; ii<=1500; ii++)
 					if(ii - TMath::Floor(ii/Div) * Div == remainder)
-						chain->Add(NtupleLocation+"/v2.0/"+DataLocation+"/*_"+TString::Itoa(ii,10)+".root");
-				if(type==7 && remainder==0) chain->Add(NtupleLocation+"/v2.0/SingleMuon_Run2016Hver3/*.root");
+                                                chain->Add(NtupleLocation+DataLocation+"/*_"+TString::Itoa(ii,10)+".root");
+                                if(type==7 && remainder==0) chain->Add(NtupleLocation+"SingleMuon_Run2016Hver3/*.root");
 			}
 		}
 

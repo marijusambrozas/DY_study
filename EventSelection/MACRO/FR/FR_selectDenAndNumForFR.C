@@ -23,7 +23,7 @@
 // -- for Rochester Muon momentum correction -- //
 #include "../../TOOL/RoccoR/RoccoR.cc"
 // -- Customized Analyzer for Drel-Yan Analysis -- //
-#include "../../HEADER/DYAnalyzer_TightID_PFIso_v20180521.h"
+#include "../../HEADER/DYAnalyzer_TightID_PFIso_v20190212.h"
 
 static inline void loadBar(int x, int n, int r, int w);
 
@@ -33,8 +33,7 @@ static inline void loadBar(int x, int n, int r, int w);
 void FR_selectDenAndNumForFR(Int_t debug, Int_t type, Int_t remainder = 9999, Int_t isTopPtReweighting = 0, TString HLTname = "Mu50")
 {
 	gROOT->SetBatch(kTRUE);
-	TString NtupleLocation = gSystem->Getenv("DM_DATA_PATH");
-	TString BaseDir= gSystem->Getenv("DM_BASE_PATH");
+        TString NtupleLocation = "root://cluster142.knu.ac.kr:1094//store/user/dpai/_prime_/DYntuple/v2.6/";
 
 	// -- Run2016 luminosity [/pb] -- //
 	Double_t lumi = Lumi; //BtoH
@@ -49,7 +48,7 @@ void FR_selectDenAndNumForFR(Int_t debug, Int_t type, Int_t remainder = 9999, In
 	else if( type == 6 ) DataLocation = "SingleMuon_Run2016G";
 	else if( type == 7 ) DataLocation = "SingleMuon_Run2016H";
 	// -- MC samples -- //
-	else if( type == 11 ) Type = "DY_M10to50";
+        else if( type == 11 ) Type = "DY_M10to50";
 	else if( type == 12 ) Type = "DY_M50toInf";
 	else if( type == 21 ) Type = "ttbar";
 	else if( type == 22 ) Type = "ttbarBackup";
@@ -95,8 +94,8 @@ void FR_selectDenAndNumForFR(Int_t debug, Int_t type, Int_t remainder = 9999, In
 	}*/
 
 	// -- Output ROOTFile -- //	
-	//TString Output_ROOTFile = BaseDir+"/RESULT/FR/hist_test_20181010_"+TString::Itoa(type,10)+"_"+TString::Itoa(remainder,10)+"_"
-	TString Output_ROOTFile = BaseDir+"/RESULT/FR/hist_TightID_PFIso_20181014_"+TString::Itoa(type,10)+"_"+TString::Itoa(remainder,10)+"_"
+        //TString Output_ROOTFile = "../RESULT/FR/hist_test_20181010_"+TString::Itoa(type,10)+"_"+TString::Itoa(remainder,10)+"_"
+        TString Output_ROOTFile = "../RESULT/FR/hist_TightID_PFIso_20181014_"+TString::Itoa(type,10)+"_"+TString::Itoa(remainder,10)+"_"
 								+TString::Itoa(isTopPtReweighting,10)+".root";
 	if( debug ) Output_ROOTFile = "test.root";
 	TFile *f = new TFile(Output_ROOTFile, "recreate");
@@ -129,30 +128,27 @@ void FR_selectDenAndNumForFR(Int_t debug, Int_t type, Int_t remainder = 9999, In
 		//Set MC chain
 		if( isMC == kTRUE )
 		{
-			TString version = "v2.1";
-			if( Type.Contains("QCD") ) version = "v2.3";
-
 			if( remainder == 9999 )
-				chain->Add(NtupleLocation+"/"+version+"/"+ntupleDirectory[i_tup]+"/*.root");
+                                chain->Add(NtupleLocation+ntupleDirectory[i_tup]+"/*.root");
 			else
 				for(Double_t ii=1; ii<=1500; ii++)
 					if(ii - TMath::Floor(ii/Div) * Div == remainder)
-						chain->Add(NtupleLocation+"/"+version+"/"+ntupleDirectory[i_tup]+"/*_"+TString::Itoa(ii,10)+".root");
+                                                chain->Add(NtupleLocation+ntupleDirectory[i_tup]+"/*_"+TString::Itoa(ii,10)+".root");
 		}
 		//Set Data chain
 		else
 		{
 			if( remainder == 9999 )
 			{
-				chain->Add(NtupleLocation+"/v2.0/"+DataLocation+"/*.root");
-				if(type==7) chain->Add(NtupleLocation+"/v2.0/SingleMuon_Run2016Hver3/*.root");
+                                chain->Add(NtupleLocation+DataLocation+"/*.root");
+                                if(type==7) chain->Add(NtupleLocation+"/SingleMuon_Run2016Hver3/*.root");
 			}
 			else
 			{
 				for(Double_t ii=1; ii<=1500; ii++)
 					if(ii - TMath::Floor(ii/Div) * Div == remainder)
-						chain->Add(NtupleLocation+"/v2.0/"+DataLocation+"/*_"+TString::Itoa(ii,10)+".root");
-				if(type==7 && remainder==0) chain->Add(NtupleLocation+"/v2.0/SingleMuon_Run2016Hver3/*.root");
+                                                chain->Add(NtupleLocation+DataLocation+"/*_"+TString::Itoa(ii,10)+".root");
+                                if(type==7 && remainder==0) chain->Add(NtupleLocation+"SingleMuon_Run2016Hver3/*.root");
 			}
 		}
 
