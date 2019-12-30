@@ -93,8 +93,8 @@ void FR_applyFR(Int_t debug, Int_t type, Int_t remainder = 9999, Int_t isTopPtRe
 	}
 
 	// -- Output ROOTFile -- //	
-        //TString Output_ROOTFile = "../RESULT/FR/fake_test_20181010_"+TString::Itoa(type,10)+"_"+TString::Itoa(remainder,10)+"_"
-        TString Output_ROOTFile = "../RESULT/FR/fake_TightID_PFIso_EffSF_20181014_"+TString::Itoa(type,10)+"_"+TString::Itoa(remainder,10)+"_"
+        //TString Output_ROOTFile = "../../RESULT/FR/fake_test_20181010_"+TString::Itoa(type,10)+"_"+TString::Itoa(remainder,10)+"_"
+        TString Output_ROOTFile = "../../RESULT/FR/fake_TightID_PFIso_EffSF_20181014_"+TString::Itoa(type,10)+"_"+TString::Itoa(remainder,10)+"_"
 								+TString::Itoa(isTopPtReweighting,10)+".root";
 	if( debug ) Output_ROOTFile = "test.root";
 	TFile *f = new TFile(Output_ROOTFile, "recreate");
@@ -131,19 +131,19 @@ void FR_applyFR(Int_t debug, Int_t type, Int_t remainder = 9999, Int_t isTopPtRe
 		//Set Data chain
 		else
 		{
-			if( remainder == 9999 )
-			{
-				chain->Add(NtupleLocation+"/v2.0/"+DataLocation+"/*.root");
+                        if( remainder == 9999 )
+                        {
+                                chain->Add(NtupleLocation+DataLocation+"/*.root");
                                 if(type==7) chain->Add(NtupleLocation+"SingleMuon_Run2016Hver3/*.root");
-			}
-			else
-			{
-				for(Double_t ii=1; ii<=1500; ii++)
-					if(ii - TMath::Floor(ii/Div) * Div == remainder)
+                        }
+                        else
+                        {
+                                for(Double_t ii=1; ii<=1500; ii++)
+                                        if(ii - TMath::Floor(ii/Div) * Div == remainder)
                                                 chain->Add(NtupleLocation+DataLocation+"/*_"+TString::Itoa(ii,10)+".root");
                                 if(type==7 && remainder==0) chain->Add(NtupleLocation+"SingleMuon_Run2016Hver3/*.root");
-			}
-		}
+                        }
+                }
 
 		NtupleHandle *ntuple = new NtupleHandle( chain );
 		ntuple->TurnOnBranches_Muon();
