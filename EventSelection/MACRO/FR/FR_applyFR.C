@@ -305,8 +305,8 @@ void FR_applyFR(Int_t debug, Int_t type, Int_t remainder = 9999, Int_t isTopPtRe
 			}
 
 			// -- Normalization -- //
-			Double_t TotWeight = GenWeight;
-			//if( isMC == kTRUE ) TotWeight = (lumi*Xsec[i_tup]/nEvents[i_tup])*GenWeight;
+                        Double_t TotWeight = GenWeight;
+                        if( isMC == kTRUE ) TotWeight = (lumi*Xsec[i_tup]/nEvents[i_tup])*GenWeight;
 
 			////////////////////////////////
 			// -- Reco level selection -- //
