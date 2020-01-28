@@ -53,7 +53,7 @@ void FR_selectDenAndNumForFR(Int_t debug, Int_t type, Int_t remainder = 9999, In
 	else if( type == 21 ) Type = "ttbar";
 	else if( type == 22 ) Type = "ttbarBackup";
 	else if( type == 41 ) Type = "VVnST";
-	else if( type == 51 ) Type = "WJetsToLNu";
+        else if( type == 51 ) Type = "WJetsToLNu_amcatnlo";
 	else if( type == 61 ) Type = "QCDMuEnriched_Pt15to170";
 	else if( type == 62 ) Type = "QCDMuEnriched_Pt170to600";
 	else if( type == 63 ) Type = "QCDMuEnriched_Pt600toInf";
@@ -95,7 +95,7 @@ void FR_selectDenAndNumForFR(Int_t debug, Int_t type, Int_t remainder = 9999, In
 
 	// -- Output ROOTFile -- //	
         //TString Output_ROOTFile = "../RESULT/FR/hist_test_20181010_"+TString::Itoa(type,10)+"_"+TString::Itoa(remainder,10)+"_"
-        TString Output_ROOTFile = "../RESULT/FR/hist_TightID_PFIso_20181014_"+TString::Itoa(type,10)+"_"+TString::Itoa(remainder,10)+"_"
+        TString Output_ROOTFile = "../RESULT/FR/hist_TightID_PFIso_20200128_"+TString::Itoa(type,10)+"_"+TString::Itoa(remainder,10)+"_"
 								+TString::Itoa(isTopPtReweighting,10)+".root";
 	if( debug ) Output_ROOTFile = "test.root";
 	TFile *f = new TFile(Output_ROOTFile, "recreate");
