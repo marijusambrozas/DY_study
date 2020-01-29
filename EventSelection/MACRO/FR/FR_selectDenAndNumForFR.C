@@ -109,6 +109,43 @@ void FR_selectDenAndNumForFR(Int_t debug, Int_t type, Int_t remainder = 9999, In
 		ntupleDirectory.push_back( "" );
 		Tag.push_back( "Data" );
 	}
+        if (type > 60) // QCD
+        {
+            ntupleDirectory.clear();
+            if (type == 61) // 15to170
+            {
+                ntupleDirectory.push_back("QCD_Pt-15to20_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt15to20/180326_143059/0000/");
+                ntupleDirectory.push_back("QCD_Pt-20to30_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt20to30/180326_143144/0000/");
+                ntupleDirectory.push_back("QCD_Pt-30to50_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt30to50/180326_143240/0000/");
+                ntupleDirectory.push_back("QCD_Pt-50to80_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt50to80/180326_143340/0000/");
+                ntupleDirectory.push_back("QCD_Pt-80to120_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt80to120/180326_143419/0000/");
+                ntupleDirectory.push_back("QCD_Pt-80to120_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt80to120_ext1/180326_143533/0000/");
+                ntupleDirectory.push_back("QCD_Pt-120to170_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt120to170/180326_143612/0000/");
+                ntupleDirectory.push_back("QCD_Pt-120to170_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt120to170_backup/180326_143654/0000/");
+            }
+            if (type == 62) // 170to600
+            {
+                ntupleDirectory.push_back("QCD_Pt-170to300_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt170to300/180326_143750/0000/");
+                ntupleDirectory.push_back("QCD_Pt-170to300_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt170to300_ext1/180326_143849/0000/");
+                ntupleDirectory.push_back("QCD_Pt-170to300_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt170to300_backup/180326_143946/0000/");
+                ntupleDirectory.push_back("QCD_Pt-300to470_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt300to470/180326_144021/0000/");
+                ntupleDirectory.push_back("QCD_Pt-300to470_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt300to470_ext1/180326_144117/0000/");
+                ntupleDirectory.push_back("QCD_Pt-300to470_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt300to470_ext2/180326_144211/0000/");
+                ntupleDirectory.push_back("QCD_Pt-470to600_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt470to600/180326_144301/0000/");
+                ntupleDirectory.push_back("QCD_Pt-470to600_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt470to600_ext1/180326_144358/0000/");
+            }
+            if (type == 63) // 600toInf
+            {
+                ntupleDirectory.push_back("QCD_Pt-600to800_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt600to800/180326_144534/0000/");
+                ntupleDirectory.push_back("QCD_Pt-600to800_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt600to800_ext1/180326_144612/0000/");
+                ntupleDirectory.push_back("QCD_Pt-600to800_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt600to800_backup/180326_144648/0000/");
+                ntupleDirectory.push_back("QCD_Pt-800to1000_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt800to1000/180326_144736/0000/");
+                ntupleDirectory.push_back("QCD_Pt-800to1000_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt800to1000_ext1/180326_144818/0000/");
+                ntupleDirectory.push_back("QCD_Pt-800to1000_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt800to1000_ext2/180326_144856/0000/");
+                ntupleDirectory.push_back("QCD_Pt-1000toInf_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt1000toInf/180326_144937/0000/");
+                ntupleDirectory.push_back("QCD_Pt-1000toInf_MuEnrichedPt5_TuneCUETP8M1_13TeV_pythia8/crab_QCDMuEnriched_Pt1000toInf_ext1/180326_145024/0000/");
+            }
+        }
 
 	// -- fake-rate binning -- //
 	const int ptbinnum_endcap = 8;
@@ -130,7 +167,12 @@ void FR_selectDenAndNumForFR(Int_t debug, Int_t type, Int_t remainder = 9999, In
 		if( isMC == kTRUE )
 		{
 			if( remainder == 9999 )
+                        {
+                            if (type < 60) // not QCD
                                 chain->Add(NtupleLocation+ntupleDirectory[i_tup]+"/*.root");
+                            else // QCD
+                                chain->Add("root://cms-xrdr.sdfarm.kr:1094//xrd/store/user/dpai/_v2p3_/"+ntupleDirectory[i_tup]+"*.root");
+                        }
 			else
 				for(Double_t ii=1; ii<=1500; ii++)
 					if(ii - TMath::Floor(ii/Div) * Div == remainder)
