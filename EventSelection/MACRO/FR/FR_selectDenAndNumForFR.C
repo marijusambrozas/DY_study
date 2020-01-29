@@ -304,7 +304,7 @@ void FR_selectDenAndNumForFR(Int_t debug, Int_t type, Int_t remainder = 9999, In
 
 					//if( mu_.isHighPtMuon()
 					if( mu_.isTightMuon()
-						&& mu_.Pt > 52 && mu_.eta < 2.4 )
+                                                && mu_.Pt > 52 && fabs(mu_.eta) < 2.4 )  // HE FORGOT FABS(ETA)!!!!!
 					{
 						Double_t pt = mu_.Pt;
 						Double_t eta = mu_.eta;
